@@ -11,11 +11,16 @@ public class PlayerStateMachine : StateMachine
     public InputReader InputReader { get; private set; }
     [field: SerializeField]
     public Animator Animator { get; private set; }
+    public Transform CamPos {get; private set;}
 
     [field: SerializeField]
     public float FreeLookMovementSpeed { get; private set; }
+    [field: SerializeField]
+    public float RotationSmooth {get; private set; }
+    
 
     private void Start(){
-        SwitchState(new PlayerIdleState(this));
+        SwitchState(new PlayerFreeLookState(this));
+        CamPos = Camera.main.transform;
     }
 }

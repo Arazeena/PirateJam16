@@ -15,7 +15,7 @@ public class PlayerDodgeState : PlayerBaseState
     public override void Tick(float deltaTime)
     {
         if(dodgeTime <= 0){
-            stateMachine.SwitchState(new PlayerIdleState(stateMachine));
+            stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
             return;
         }
 

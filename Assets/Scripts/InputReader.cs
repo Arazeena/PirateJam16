@@ -28,6 +28,10 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         Movement = context.ReadValue<Vector2>();
     }
 
+    public void OnCamera(InputAction.CallbackContext context){
+        //Implemented with CineMachine
+    }
+
     private void OnDestroy(){
         controls.Player.Disable();
     }
