@@ -53,6 +53,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Target"",
+                    ""type"": ""Button"",
+                    ""id"": ""4db712ad-baba-4a3a-a290-deda2d4d7ec9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -165,6 +174,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Camera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c22d617d-c728-4796-91d0-a6b79a6ac123"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Target"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0b6d03b7-d638-43e7-a3fd-56dd127007a6"",
+                    ""path"": ""<Keyboard>/alt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""Target"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -204,6 +235,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Camera = m_Player.FindAction("Camera", throwIfNotFound: true);
+        m_Player_Target = m_Player.FindAction("Target", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -268,6 +300,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Dodge;
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Camera;
+    private readonly InputAction m_Player_Target;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -275,6 +308,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Camera => m_Wrapper.m_Player_Camera;
+        public InputAction @Target => m_Wrapper.m_Player_Target;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -293,6 +327,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Camera.started += instance.OnCamera;
             @Camera.performed += instance.OnCamera;
             @Camera.canceled += instance.OnCamera;
+            @Target.started += instance.OnTarget;
+            @Target.performed += instance.OnTarget;
+            @Target.canceled += instance.OnTarget;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -306,6 +343,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Camera.started -= instance.OnCamera;
             @Camera.performed -= instance.OnCamera;
             @Camera.canceled -= instance.OnCamera;
+            @Target.started -= instance.OnTarget;
+            @Target.performed -= instance.OnTarget;
+            @Target.canceled -= instance.OnTarget;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -346,5 +386,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnDodge(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnCamera(InputAction.CallbackContext context);
+        void OnTarget(InputAction.CallbackContext context);
     }
 }

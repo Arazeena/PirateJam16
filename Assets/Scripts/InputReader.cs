@@ -7,7 +7,7 @@ using UnityEngine;
 public class InputReader : MonoBehaviour, Controls.IPlayerActions
 {
 
-    public event Action DodgeEvent;
+    public event Action DodgeEvent, TargetEvent;
     public Vector2 Movement {get; private set;}
 
     private Controls controls;
@@ -36,4 +36,11 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         controls.Player.Disable();
     }
 
+    public void OnTarget(InputAction.CallbackContext context)
+    {
+        if(!context.performed)
+            return;
+        
+        TargetEvent?.Invoke();
+    }
 }
