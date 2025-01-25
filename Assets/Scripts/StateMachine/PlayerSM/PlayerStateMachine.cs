@@ -13,6 +13,7 @@ public class PlayerStateMachine : StateMachine
     public Transform CamPos {get; private set;}
 
     [field: SerializeField] public float FreeLookMovementSpeed { get; private set; }
+    [field: SerializeField] public float CombatMovementSpeed { get; private set; }
     [field: SerializeField] public float RotationSmooth {get; private set; }
     
 
