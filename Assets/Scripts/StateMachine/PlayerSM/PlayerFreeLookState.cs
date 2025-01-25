@@ -21,13 +21,13 @@ public class PlayerFreeLookState : PlayerBaseState
     }
     public override void Tick(float deltaTime)
     {
-        if(!stateMachine.CharacterController.isGrounded && stateMachine.CharacterController.velocity.y < 0){
+       /* if(!stateMachine.CharacterController.isGrounded && stateMachine.CharacterController.velocity.y < -1){
             stateMachine.SwitchState(new PlayerFallingState(stateMachine));
             return;
-        }
+        }*/
 
         Vector3 movement = CalculateLookDirection();
-        stateMachine.CharacterController.Move(movement * stateMachine.FreeLookMovementSpeed * deltaTime);
+        Move(movement * stateMachine.FreeLookMovementSpeed,  deltaTime);
         if(stateMachine.InputReader.Movement == Vector2.zero) {
             stateMachine.Animator.SetFloat(FreeLookSpeedKey, 0, animDamping, deltaTime);
             return;
